@@ -1,17 +1,20 @@
+import { Button } from "../ui/button";
+import AddTodoModal from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 
 const TodoContainer = () => {
   return (
     <div>
-      <div>
-        <button>Add todo</button>
-        <button>Filter</button>
+      <div className="mb-5 p-4 flex justify-between">
+        
+        <AddTodoModal></AddTodoModal>
+        <Button>Filter</Button>
       </div>
 
-      <div className="bg-red-500 w-full h-full p-5 rounded-xl space-y-5">
-        <div className="bg-white font-bold text-xl p-3 flex justify-center items-center" >
+      <div className="bg-blue-400 w-full h-full p-5 rounded-xl space-y-5">
+        {/* <div className="bg-white font-bold text-xl p-3 flex justify-center items-center" >
             <p> There is no task pending</p>
-        </div>
+        </div> */}
         
         <TodoCard></TodoCard>
         <TodoCard></TodoCard>

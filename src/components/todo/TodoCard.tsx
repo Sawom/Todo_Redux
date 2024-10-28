@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../ui/button';
 
 const TodoCard = () => {
     return (
@@ -9,8 +10,8 @@ const TodoCard = () => {
           <p>Description</p>
 
           <div className="space-x-5">
-            <button>del</button>
-            <button>edit</button>
+            <Button className='bg-red-500'>del</Button>
+            <Button>edit</Button>
           </div>
         </div>
     );
