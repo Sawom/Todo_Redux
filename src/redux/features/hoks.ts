@@ -1,3 +1,5 @@
+// copy from redux documentation: Redux Toolkit TypeScript Quick Start
+
 import { useDispatch, useSelector } from 'react-redux'
 import type { RootState, AppDispatch } from './store'
 
