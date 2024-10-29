@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 // todo er task gular type define korlam
 type TTodo ={
+    id: string;
     title: string;
     description: string;
     isCompleted?: boolean;
