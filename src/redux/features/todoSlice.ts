@@ -27,13 +27,19 @@ const todoSlice = createSlice({
         },
         // id diye filter kore remove korbo. obj ashbe na, id string hisebe ashbe
         // filter notun ary return kore but eta set korte hobe. nahole delete hobe na
-        removeTodo: (state, action: PayloadAction<string>)=>{
+        removeTodo: (state, action: PayloadAction<string> )=>{
             state.todos = state.todos.filter( (item)=> item.id !== action.payload )
+        },
+        toogleComplete: (state,action: PayloadAction<string> )=>{
+            const task = state.todos.find( (item)=> item.id === action.payload );
+            task!.isCompleted = !task?.isCompleted;
+            // task!.isCompleted mane undefined hobe na.
+            // !task?.isCompleted mane state ultay dicche 
         }
 
     }, 
 })
 
-// reducer gula shb export kore dite hobe
-export const {addTodo, removeTodo} = todoSlice.actions;
+// reducer gula shb export kore dite hobe dispatch er jnno
+export const {addTodo, removeTodo, toogleComplete} = todoSlice.actions;
 export default todoSlice.reducer;
