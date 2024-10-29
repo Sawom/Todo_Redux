@@ -22,7 +22,7 @@ const TodoContainer = () => {
         
         {
           todos.map( (item)=>(
-            <TodoCard  title={item.title} description={item.description} ></TodoCard>
+            <TodoCard  {...item} ></TodoCard>
           ) )
         }
         
