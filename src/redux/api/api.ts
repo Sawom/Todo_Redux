@@ -21,11 +21,15 @@ export const baseApi = createApi({
         //     body: { category: catagoryName}
         // }),
         addTodos: builder.mutation({
-            query: (data)=>( {
-                url: '/task',
-                method: 'POST',
-                body: data
-            }),
+            query: (data)=> {
+                console.log(data);
+                return{
+                    url: '/task',
+                    method: 'POST',
+                    body: data,
+                }
+                
+            },
         }),
 
     }),

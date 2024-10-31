@@ -12,7 +12,13 @@ import {
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@radix-ui/react-select";
+import { Select,SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue, } from "../ui/select";
+
 
 const AddTodoModal = () => {
   const [task, setTask] = useState("");
@@ -34,8 +40,8 @@ const AddTodoModal = () => {
 
     const taskDetails = {
       title: task,
-      isCompleted: false,
       description,
+      isCompleted: false,
       priority,
     };
     //! for local state manage only dispatch used
@@ -91,7 +97,7 @@ const AddTodoModal = () => {
                 Priority
               </Label>
 
-              <Select>
+              <Select onValueChange={(value)=> setPriority(value)} >
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select priority" />
                 </SelectTrigger>
