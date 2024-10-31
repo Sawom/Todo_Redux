@@ -12,7 +12,25 @@ export const baseApi = createApi({
                 method: 'GET',
             }),
         }),
+
+        // backend obj expect kore. post korar somoy obj send korte hobe
+        // single vale send korte holeo obj hisebe send korte hobe. 
+        // query: (catagoryName)=>( {
+        //     url: '/tasks',
+        //     method: 'POST',
+        //     body: { category: catagoryName}
+        // }),
+        addTodos: builder.mutation({
+            query: (data)=>( {
+                url: '/tasks',
+                method: 'POST',
+                body: data
+            }),
+        }),
+
     }),
 })
 
-export const {useGetTodosQuery} = baseApi;
+// hook export kortechi. getTodos er jnno useGetTodosQuery
+// addTodos er jnno useAddTodosMutation
+export const {useGetTodosQuery, useAddTodosMutation} = baseApi;

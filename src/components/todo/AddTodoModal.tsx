@@ -13,13 +13,18 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useAppDispatch, useAppSelector } from "@/redux/features/hoks";
 import { addTodo } from "@/redux/features/todoSlice";
+import { useAddTodosMutation } from "@/redux/api/api";
 
 const AddTodoModal = () => {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
   // dispatch
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch(); local state er kaj korle tokhn dispatch korte hoy
   
+  // for server
+  // ary er 1st parameter hobe funtion, 2nd taa hobe obj
+  const [addTodo, {data, isLoading, isError,isSuccess}] = useAddTodosMutation();
+  console.log({data, isLoading, isError,isSuccess});
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -31,7 +36,9 @@ const AddTodoModal = () => {
         title:task,
         description:description,
     }
-    dispatch(addTodo( taskDetails ));
+    //! for local state manage only dispatch used
+    // dispatch(addTodo( taskDetails ));
+    addTodo(taskDetails);
   };
 
   return (
