@@ -11,7 +11,12 @@ export const baseApi = createApi({
                 url: '/task',
                 method: 'GET',
             }),
+            // tag holo cash,query kore niye ashi
+            providesTags: ['todo'],
         }),
+
+        // query calabo zokhn tokhn providesTags
+        // zokhn mutation calabo tokhn invalidatesTags
 
         // backend obj expect kore. post korar somoy obj send korte hobe
         // single vale send korte holeo obj hisebe send korte hobe. 
@@ -22,7 +27,7 @@ export const baseApi = createApi({
         // }),
         addTodos: builder.mutation({
             query: (data)=> {
-                console.log(data);
+                // console.log(data);
                 return{
                     url: '/task',
                     method: 'POST',
@@ -30,6 +35,7 @@ export const baseApi = createApi({
                 }
                 
             },
+            invalidatesTags: ['todo'],
         }),
 
     }),
