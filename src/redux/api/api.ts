@@ -7,8 +7,9 @@ export const baseApi = createApi({
     baseQuery: fetchBaseQuery( {baseUrl: "http://localhost:5000"} ),
     endpoints: (builder)=>({
         getTodos: builder.query({
-            query: ()=>( {
-                url: '/task',
+            // priority diye query korbo
+            query: (priority)=>( {
+                url: `/task?priority=${priority}`,
                 method: 'GET',
             }),
             // tag holo cash,query kore niye ashi
