@@ -1,38 +1,53 @@
-import React from 'react';
-import { Button } from '../ui/button';
-import { useAppDispatch } from '@/redux/features/hoks';
-import { removeTodo, toogleComplete } from '@/redux/features/todoSlice';
+import { useAppDispatch } from "@/redux/features/hoks";
+import { removeTodo, toogleComplete } from "@/redux/features/todoSlice";
+import { Button } from "../ui/button";
 
 type TTodoCardProps = {
   id: string;
   title: string;
   description: string;
   isCompleted?: boolean;
-}
+  priority: string;
+};
 
-
-
-const TodoCard = ({title, description, id, isCompleted}: TTodoCardProps) => {
+const TodoCard = ({ title, description, id, isCompleted, priority }: TTodoCardProps) => {
   const dispatch = useAppDispatch();
 
-  const toogleState =()=>{
+  const toogleState = () => {
     dispatch(toogleComplete(id));
-  }
+  };
 
   return (
-        <div className="bg-white rounded-md flex justify-between items-center p-3">
-          <input  onChange={toogleState} type="checkbox" name="" id="" />
-          <p>{title}</p>
-          {/* <p>Time</p> */}
-          <div>{isCompleted? <p className='text-green-500 font-bold' >Done</p> : 'pending'} </div>
-          <p>{description}</p>
+    <div className="bg-white rounded-md flex justify-between items-center p-3">
+      <input className="mr-3" onChange={toogleState} type="checkbox" name="" id="" />
+      <p className="flex-1">{title}</p>
+      {/* <p>Time</p> */}
+      <div className="flex-1 flex items-center gap-2">
+        <div className={`size-3 rounded-full 
+          ${priority === 'high' ? 'bg-red-500' : null }
+          ${priority === 'medium' ? 'bg-yellow-500' : null }
+          ${priority === 'low' ? 'bg-green-500' : null }
+        `}
+        ></div>
+        <p>{priority}</p>
+      </div>
+      <div className="flex-1">
+        {isCompleted ? (
+          <p className="text-green-500 font-bold">Done</p>
+        ) : (
+          <p className="text-red-500 font-bold">Pending</p>
+        )}
+      </div>
+      <p className="flex-[2]">{description}</p>
 
-          <div className="space-x-5">
-            <Button  onClick={()=> dispatch(removeTodo(id)) } className='bg-red-500'>del</Button>
-            <Button>edit</Button>
-          </div>
-        </div>
-    );
+      <div className="space-x-5">
+        <Button onClick={() => dispatch(removeTodo(id))} className="bg-red-500">
+          del
+        </Button>
+        <Button>edit</Button>
+      </div>
+    </div>
+  );
 };
 
 export default TodoCard;

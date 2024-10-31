@@ -3,9 +3,19 @@ import { Button } from "../ui/button";
 import AddTodoModal from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 import TodoFilter from "./TodoFilter";
+import { useGetTodosQuery } from "@/redux/api/api";
 
 const TodoContainer = () => {
-  const {todos}= useAppSelector( (state)=> state.todos )
+  // from local state
+  // const {todos}= useAppSelector( (state)=> state.todos )
+
+  // from server
+  const {data: todos, isError, isLoading} = useGetTodosQuery(undefined);
+
+  console.log(todos);
+  if(isLoading){
+    return <p>Loading...</p>
+  }
 
   return (
     <div>
@@ -21,7 +31,7 @@ const TodoContainer = () => {
         </div> */}
         
         {
-          todos.map( (item)=>(
+          todos?.data?.map( (item)=>(
             <TodoCard  {...item} ></TodoCard>
           ) )
         }

@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import todoReducer from './todoSlice';
+import { baseApi } from "../api/api";
 
 export const store = configureStore({
     reducer: {
+        [baseApi.reducerPath] : baseApi.reducer,
         todos: todoReducer,
     },
+    // from docs => middleware
+    middleware: (getDefaultMiddlewares)=>  getDefaultMiddlewares().concat(baseApi.middleware),
 });
 
 // 1ta reducer => 1ta state k handle kore
