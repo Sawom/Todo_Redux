@@ -38,10 +38,23 @@ export const baseApi = createApi({
             },
             invalidatesTags: ['todo'],
         }),
+        // update
+        updateTodos: builder.mutation({
+            query: (options)=> {
+                // console.log(data);
+                return{
+                    url: `/task/${options.id}`,
+                    method: 'PUT',
+                    body: options.data,
+                }
+                
+            },
+            invalidatesTags: ['todo'],
+        }),
 
     }),
 })
 
 // hook export kortechi. getTodos er jnno useGetTodosQuery
 // addTodos er jnno useAddTodosMutation
-export const {useGetTodosQuery, useAddTodosMutation} = baseApi;
+export const {useGetTodosQuery, useAddTodosMutation, useUpdateTodosMutation} = baseApi;

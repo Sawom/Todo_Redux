@@ -1,32 +1,67 @@
-import { useAppDispatch } from "@/redux/features/hoks";
-import { removeTodo, toogleComplete } from "@/redux/features/todoSlice";
+import { useUpdateTodosMutation } from "@/redux/api/api";
+import { removeTodo } from "@/redux/features/todoSlice";
 import { Button } from "../ui/button";
 
 type TTodoCardProps = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   isCompleted?: boolean;
   priority: string;
 };
 
-const TodoCard = ({ title, description, id, isCompleted, priority }: TTodoCardProps) => {
-  const dispatch = useAppDispatch();
+const TodoCard = ({
+  title,
+  description,
+  _id,
+  isCompleted,
+  priority,
+}: TTodoCardProps) => {
+  // const dispatch = useAppDispatch();
+
+  const [updateTodo, { isLoading }] = useUpdateTodosMutation();
 
   const toogleState = () => {
-    dispatch(toogleComplete(id));
+    const taskData = {
+      _id,
+      title,
+      description,
+      priority,
+      isCompleted: !isCompleted,
+    };
+
+    const options = {
+      id: _id,
+      data: {
+        title,
+        description,
+        priority,
+        isCompleted: !isCompleted,
+      },
+    };
+    // dispatch(toogleComplete(id));
+    console.log(options);
+    updateTodo(options);
   };
 
   return (
     <div className="bg-white rounded-md flex justify-between items-center p-3">
-      <input className="mr-3" onChange={toogleState} type="checkbox" name="" id="" />
+      <input
+        className="mr-3"
+        onChange={toogleState}
+        type="checkbox"
+        name="complete"
+        id="complete"
+        defaultChecked={isCompleted}
+      />
       <p className="flex-1">{title}</p>
       {/* <p>Time</p> */}
       <div className="flex-1 flex items-center gap-2">
-        <div className={`size-3 rounded-full 
-          ${priority === 'high' ? 'bg-red-500' : null }
-          ${priority === 'medium' ? 'bg-yellow-500' : null }
-          ${priority === 'low' ? 'bg-green-500' : null }
+        <div
+          className={`size-3 rounded-full 
+          ${priority === "high" ? "bg-red-500" : null}
+          ${priority === "medium" ? "bg-yellow-500" : null}
+          ${priority === "low" ? "bg-green-500" : null}
         `}
         ></div>
         <p>{priority}</p>
